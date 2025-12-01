@@ -27,6 +27,9 @@
 		087CFC7A2EDD670400650A8A /* FormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087CFC792EDD670400650A8A /* FormFieldView.swift */; };
 		087CFC7C2EDD690400650A8A /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087CFC7B2EDD690400650A8A /* AppConstants.swift */; };
 		087CFC7E2EDD6B0000650A8A /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087CFC7D2EDD6B0000650A8A /* InputView.swift */; };
+		087CFC802EDD6FAE00650A8A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087CFC7F2EDD6FAE00650A8A /* AuthManager.swift */; };
+		087CFC822EDD750600650A8A /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087CFC812EDD750600650A8A /* CustomTextFieldStyle.swift */; };
+		087CFC852EDD76DC00650A8A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087CFC842EDD76DC00650A8A /* LoginViewModel.swift */; };
 		08A6409B2E9D41680048C996 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6409A2E9D41680048C996 /* RootView.swift */; };
 		08A6409D2E9D43180048C996 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6409C2E9D43180048C996 /* Tab.swift */; };
 		08A6409F2E9D43450048C996 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6409E2E9D43450048C996 /* SearchView.swift */; };
@@ -38,7 +41,6 @@
 		08A640B12E9D4A030048C996 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A640B02E9D4A030048C996 /* LessonView.swift */; };
 		08A640B32E9D4D2B0048C996 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A640B22E9D4D2B0048C996 /* Lesson.swift */; };
 		08D4386C2ED8481300EB6DB8 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4386B2ED8481300EB6DB8 /* PrimaryButton.swift */; };
-		08D438882ED84C3700EB6DB8 /* PinkPressableButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D438872ED84C3700EB6DB8 /* PinkPressableButtonStyle.swift */; };
 		08D4388A2ED84E6400EB6DB8 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D438892ED84E6400EB6DB8 /* PrimaryButtonStyle.swift */; };
 		08DCCC762EB338D600A95052 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DCCC752EB338D600A95052 /* LoginView.swift */; };
 		08DCCC782EB4717D00A95052 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DCCC772EB4717D00A95052 /* SignUpView.swift */; };
@@ -67,6 +69,9 @@
 		087CFC792EDD670400650A8A /* FormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
 		087CFC7B2EDD690400650A8A /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		087CFC7D2EDD6B0000650A8A /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		087CFC7F2EDD6FAE00650A8A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		087CFC812EDD750600650A8A /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
+		087CFC842EDD76DC00650A8A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		08A6409A2E9D41680048C996 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		08A6409C2E9D43180048C996 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		08A6409E2E9D43450048C996 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -78,7 +83,6 @@
 		08A640B02E9D4A030048C996 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
 		08A640B22E9D4D2B0048C996 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		08D4386B2ED8481300EB6DB8 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
-		08D438872ED84C3700EB6DB8 /* PinkPressableButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinkPressableButtonStyle.swift; sourceTree = "<group>"; };
 		08D438892ED84E6400EB6DB8 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		08DCCC752EB338D600A95052 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		08DCCC772EB4717D00A95052 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -118,7 +122,6 @@
 				081928A82E823CD900117E0B /* App */,
 				081928A92E823CE500117E0B /* Core */,
 				081928AA2E823CF200117E0B /* Features */,
-				081928A12E823CD500117E0B /* Assets.xcassets */,
 			);
 			path = Project2_20251;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 		081928B02E823D2700117E0B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				081928A12E823CD500117E0B /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -442,6 +446,14 @@
 			path = FlipCard;
 			sourceTree = "<group>";
 		};
+		087CFC832EDD76D200650A8A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				087CFC842EDD76DC00650A8A /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		08A640AA2E9D459D0048C996 /* List */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,6 +484,7 @@
 		08D438692ED847EC00EB6DB8 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				087CFC812EDD750600650A8A /* CustomTextFieldStyle.swift */,
 				087CFC792EDD670400650A8A /* FormFieldView.swift */,
 				087CFC7D2EDD6B0000650A8A /* InputView.swift */,
 				08D438862ED84C2800EB6DB8 /* Button */,
@@ -491,7 +504,6 @@
 			isa = PBXGroup;
 			children = (
 				08D438892ED84E6400EB6DB8 /* PrimaryButtonStyle.swift */,
-				08D438872ED84C3700EB6DB8 /* PinkPressableButtonStyle.swift */,
 				08D4386A2ED847F500EB6DB8 /* View */,
 			);
 			path = Button;
@@ -508,6 +520,8 @@
 		08DCCC722EB337B300A95052 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				087CFC832EDD76D200650A8A /* ViewModel */,
+				087CFC7F2EDD6FAE00650A8A /* AuthManager.swift */,
 				08DCCC752EB338D600A95052 /* LoginView.swift */,
 				08DCCC772EB4717D00A95052 /* SignUpView.swift */,
 				08DCCC792EB4A40700A95052 /* CreatePasswordView.swift */,
@@ -590,13 +604,13 @@
 				08A6409F2E9D43450048C996 /* SearchView.swift in Sources */,
 				087CFC7C2EDD690400650A8A /* AppConstants.swift in Sources */,
 				08A640A12E9D43970048C996 /* LearnView.swift in Sources */,
+				087CFC802EDD6FAE00650A8A /* AuthManager.swift in Sources */,
 				08DCCC7A2EB4A40700A95052 /* CreatePasswordView.swift in Sources */,
 				0807D9102EAF4950008E9F8F /* LangSelect.swift in Sources */,
 				08D4388A2ED84E6400EB6DB8 /* PrimaryButtonStyle.swift in Sources */,
 				08712C432EAA06D900AE52E2 /* ReasonsFlowView.swift in Sources */,
 				08DCCC782EB4717D00A95052 /* SignUpView.swift in Sources */,
 				08DCCC762EB338D600A95052 /* LoginView.swift in Sources */,
-				08D438882ED84C3700EB6DB8 /* PinkPressableButtonStyle.swift in Sources */,
 				08712C312EAA01C200AE52E2 /* OptionItem.swift in Sources */,
 				08A6409B2E9D41680048C996 /* RootView.swift in Sources */,
 				08712C412EAA06B800AE52E2 /* ReasonsFlowViewModel.swift in Sources */,
@@ -621,6 +635,8 @@
 				08772E742ECC3CFF009A0B15 /* CardFront.swift in Sources */,
 				08772E782ECC3D13009A0B15 /* FlipCardView.swift in Sources */,
 				08712C372EAA03E000AE52E2 /* ReasonsBaseView.swift in Sources */,
+				087CFC822EDD750600650A8A /* CustomTextFieldStyle.swift in Sources */,
+				087CFC852EDD76DC00650A8A /* LoginViewModel.swift in Sources */,
 				08A640A32E9D43A80048C996 /* ReviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

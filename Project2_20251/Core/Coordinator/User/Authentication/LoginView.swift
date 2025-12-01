@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    
-    @State private var email: String = ""
-    @State private var password: String = ""
+    // 1. Kết nối với ViewModel
+    @StateObject private var viewModel = LoginViewModel()
+    @EnvironmentObject var authManager: AuthManager
     
     var body: some View {
         NavigationStack {
@@ -18,16 +18,16 @@ struct LoginView: View {
                 VStack(spacing: 0) {
                     
                     // --- Header ---
-                    HeaderView()
+                    LoginHeaderView()
                         .padding(.top, AppConstants.defaultSpacing)
                         .padding(.bottom, AppConstants.largeSpacing)
 
-                    // --- Form ---
+                    // --- Form Input ---
                     VStack(spacing: AppConstants.defaultSpacing) {
                         
                         FormFieldView(label: "Email Address") {
                             InputView(
-                                text: $email,
+                                text: $viewModel.email, // Binding vào ViewModel
                                 placeholder: "Enter email",
                                 isSecureField: false
                             )
@@ -37,7 +37,7 @@ struct LoginView: View {
                         
                         FormFieldView(label: "Password") {
                             InputView(
-                                text: $password,
+                                text: $viewModel.password, // Binding vào ViewModel
                                 placeholder: "Enter password",
                                 isSecureField: true
                             )
@@ -45,39 +45,55 @@ struct LoginView: View {
                         
                         ForgotPasswordButton()
                         
-                        PrimaryButton(title: "Đăng nhập") {
-                            print("Email: \(email)")
-                            print("Password: \(password)")
+                        // Hiển thị lỗi nếu có
+                        if let error = viewModel.errorMessage {
+                            Text(error)
+                                .font(.caption)
+                                .foregroundColor(.red)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        
+                        // Nút Login (có loading)
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .frame(height: AppConstants.buttonHeight)
+                        } else {
+                            PrimaryButton(title: "Đăng nhập") {
+                                viewModel.login(authManager: authManager)
+                            }
                         }
                     }
                     .padding(.horizontal, AppConstants.screenPadding)
                     
-                    // --- Divider ---
-                    OrDividerView()
-                        .padding(.vertical, AppConstants.defaultSpacing)
-                        .padding(.horizontal, AppConstants.screenPadding)
-                    
-                    // --- Socials ---
-                    SocialLoginView()
-                        .padding(.horizontal, AppConstants.screenPadding)
-                    
-                    // --- Sign Up ---
-                    SignUpNavigation()
-                        .padding(.vertical, AppConstants.defaultSpacing)
-
+                    // --- Footer Section ---
+                    VStack(spacing: AppConstants.defaultSpacing) {
+                        OrDividerView()
+                        
+                        SocialLoginView(
+                            onFacebook: viewModel.loginWithFacebook,
+                            onGoogle: viewModel.loginWithGoogle
+                        )
+                        
+                        SignUpNavigation()
+                    }
+                    .padding(.vertical, AppConstants.defaultSpacing)
+                    .padding(.horizontal, AppConstants.screenPadding)
                 }
             }
             .background(Color.neutral01)
-            .navigationBarHidden(true) // Ẩn thanh Navigation
+            .navigationBarHidden(true)
         }
     }
-    
-    // MARK: - View Con (Tách biệt logic)
+}
 
-    // --- Header (Logo & Tiêu đề) ---
-    private struct HeaderView: View {
+// MARK: - Subviews (Được tách ra Extension để gọn Code chính)
+
+// Để tránh xung đột tên với các file khác, nên để private hoặc fileprivate
+fileprivate extension LoginView {
+    
+    struct LoginHeaderView: View {
         var body: some View {
-            VStack(spacing: AppConstants.mediumSpacing) { // Dùng hằng số
+            VStack(spacing: AppConstants.mediumSpacing) {
                 Image("img_login")
                     .resizable()
                     .scaledToFit()
@@ -86,79 +102,50 @@ struct LoginView: View {
                 Text("For free, join now and \n start learning")
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
-                    .font(.system(size: 22))
-                    .fontWeight(.medium)
+                    .font(.system(size: 22, weight: .medium))
             }
-            .padding(.horizontal, 56) // Padding này có thể giữ lại nếu nó là đặc thù
+            .padding(.horizontal, 56)
         }
     }
     
-    // --- Nút Quên mật khẩu ---
-    private struct ForgotPasswordButton: View {
+    struct ForgotPasswordButton: View {
         var body: some View {
-            Button(action: { /* TODO: Forgot Password */ }) {
+            Button(action: { /* TODO */ }) {
                 Text("Forgot Password")
-                    .font(.system(size: 15))
-                    .fontWeight(.medium)
+                    .font(.system(size: 15, weight: .medium))
                     .foregroundColor(Color.error02)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.bottom, AppConstants.smallSpacing) // Thay cho padding 8
+            .padding(.bottom, AppConstants.smallSpacing)
         }
     }
     
-    // --- Nút Login ---
-    private struct LoginButton: View {
-        var body: some View {
-            Button(action: { /* TODO: Login Action */ }) {
-                Text("Login")
-                    .font(.system(size: 20))
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: AppConstants.buttonHeight) // Dùng hằng số
-                    .foregroundStyle(Color.white)
-                    .background(Color.primary01)
-                    .cornerRadius(AppConstants.cornerRadius) // Dùng hằng số
-            }
-        }
-    }
-    
-    // --- Đường kẻ "Or" ---
-    private struct OrDividerView: View {
+    struct OrDividerView: View {
         var body: some View {
             HStack(spacing: AppConstants.mediumSpacing) {
-                // --- 5. Cách làm Divider sạch hơn ---
                 Color.neutral08.frame(height: AppConstants.dividerHeight)
-                
                 Text("Or")
-                    .font(.system(size: 15))
-                    .fontWeight(.medium)
+                    .font(.system(size: 15, weight: .medium))
                     .foregroundColor(Color.neutral08)
-                
                 Color.neutral08.frame(height: AppConstants.dividerHeight)
             }
         }
     }
     
-    // --- Nút Social (Facebook, Google) ---
-    private struct SocialLoginView: View {
+    struct SocialLoginView: View {
+        var onFacebook: () -> Void
+        var onGoogle: () -> Void
+        
         var body: some View {
             HStack(spacing: AppConstants.mediumSpacing) {
-                // --- 6. Tái sử dụng Social Button ---
-                SocialButton(imageName: .imgFacebook) {
-                    // TODO: Login Facebook
-                }
-                
-                SocialButton(imageName: .imgGoogle) {
-                    // TODO: Login Google
-                }
+                SocialButton(imageName: "img_facebook", action: onFacebook) // Sửa lại String nếu chưa có Resource
+                SocialButton(imageName: "img_google", action: onGoogle)
             }
         }
     }
-
-    // --- 6. View SocialButton (Tái sử dụng) ---
-    private struct SocialButton: View {
-        let imageName: ImageResource // Dùng ImageResource (hoặc String)
+    
+    struct SocialButton: View {
+        let imageName: String
         let action: () -> Void
         
         var body: some View {
@@ -166,8 +153,8 @@ struct LoginView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 24) // Chỉ cần set height cho ảnh
-                    .frame(maxWidth: .infinity, maxHeight: .infinity) // Căn giữa ảnh
+                    .frame(height: 24)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .frame(height: AppConstants.buttonHeight)
             .frame(maxWidth: .infinity)
@@ -175,47 +162,32 @@ struct LoginView: View {
             .cornerRadius(AppConstants.cornerRadius)
             .overlay(
                 RoundedRectangle(cornerRadius: AppConstants.cornerRadius)
-                    .stroke(Color.neutral08, lineWidth: 1) // Thêm border cho rõ
+                    .stroke(Color.neutral08, lineWidth: 1)
             )
         }
     }
     
-    // --- Link tới màn Đăng ký ---
-    private struct SignUpNavigation: View {
+    struct SignUpNavigation: View {
         var body: some View {
-            HStack(spacing: 4) { // Giảm spacing
-                Text("Not you member?")
+            HStack(spacing: 4) {
+                Text("Not a member?") // Đã sửa lỗi chính tả "Not you member"
                     .font(.system(size: 17))
                     .fontWeight(.regular)
                 
                 NavigationLink(destination: SignUpView()) {
                     Text("Sign up")
-                        .font(.system(size: 17))
-                        .fontWeight(.medium)
-                        .foregroundColor(Color.primary01) // Làm nổi bật link
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundColor(Color.primary01)
                 }
             }
         }
     }
 }
 
-// --- 7. Sửa CustomTextFieldStyle dùng `makeBody` ---
-struct CustomTextFieldStyle: TextFieldStyle {
-    public func _body (configuration: TextField<Self._Label>) -> some View {
-        return configuration
-            .padding(.horizontal, 20)
-            .padding(.vertical, 18)
-            .background(Color.white)
-            .cornerRadius(16)
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(lineWidth: 2)
-                    .foregroundColor(.primary01)
-            )
-            .contentShape(RoundedRectangle(cornerRadius: 16))
+// MARK: - Components Placeholder (Giả lập nếu chưa có file riêng)
 
-    }
-}
 #Preview {
+    // Cần inject EnvironmentObject để Preview chạy được
     LoginView()
+        .environmentObject(AuthManager())
 }

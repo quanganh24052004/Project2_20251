@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct RootView: View {
+    @EnvironmentObject var authManager: AuthManager
     @State private var selectedTab: AppTab = .review
 
     var body: some View {
